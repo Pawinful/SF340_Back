@@ -25,6 +25,14 @@ const UserSchema = mongoose.Schema(
         faculty: {
             type: String,
             required: true
+        },
+        bookingHistory: {
+            type: [String],
+            default: []
+        },
+        ongoingBooking: {
+            type: [String],
+            default: []
         }
     },
     {

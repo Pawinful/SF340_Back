@@ -6,6 +6,7 @@ import { connectDB } from './config/db.js';
 import roomRoutes from './routes/roomRoute.js';
 import adminRoutes from './routes/adminRoute.js';
 import userRoutes from './routes/userRoute.js';
+import bookingRoutes from './routes/bookingRoute.js';
 
 dotenv.config();
 
@@ -27,6 +28,7 @@ app.use(function(req, res, next) {
 app.use('/api/rooms', roomRoutes);
 app.use('/api/admin', adminRoutes);
 app.use('/api/user', userRoutes);
+app.use('/api/booking', bookingRoutes);
 
 
 app.listen(PORT, () => {

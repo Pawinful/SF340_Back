@@ -1,5 +1,4 @@
 import mongoose from 'mongoose';
-import Admin from '../models/admin.model.js';
 import axios from 'axios';
 import User from '../models/user.model.js';
 
@@ -41,7 +40,8 @@ export const login = async (req, res) => {
                     await newUser.save();
                     console.log("new user data added!");
                 }
-                return res.status(200).json({ success: true, data: data });
+                const user = await User.find({ username: data.username }).exec();
+                return res.status(200).json({ success: true, data: user });
             } else {
                 console.log("Error: Unauthorized")
                 return res.status(401).json({ success: false, message: data });
