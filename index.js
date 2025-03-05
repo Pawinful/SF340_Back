@@ -3,6 +3,7 @@ import express from 'express';
 
 import { connectDB } from './config/db.js';
 import roomRoutes from './routes/roomRoute.js';
+import adminRoutes from './routes/adminRoute.js';
 
 dotenv.config();
 
@@ -13,6 +14,7 @@ const PORT = process.env.PORT || 3000;
 app.use(express.json());
 
 app.use('/api/rooms', roomRoutes);
+app.use('/api/admin', adminRoutes);
 
 app.listen(PORT, () => {
     connectDB();

@@ -9,8 +9,8 @@ router.get('/getAllRoom', getAllRoom);
 
 router.get('/getRoom', getRoom);
 
-router.delete('/:id', deleteRoom);
+router.delete('/deleteRoom/:id', deleteRoom);
 
-router.put('/:id', editRoom);
+router.put('/editRoom/:id', editRoom);
 
 export default router;

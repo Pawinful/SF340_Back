@@ -12,10 +12,10 @@ export const getAllRoom = async (req, res) => {
 }
 
 export const getRoom = async (req, res) => {
-    const roomName = req.body('roomNameEn');
+    const room = req.body;
 
     try {
-        const Rooms = await Room.find({}, { projection: { roomNameEN: roomName } });
+        const Rooms = await Room.find({ roomNameEN: room.roomNameEN });
         res.status(200).json({ success: true, data: Rooms });
     } catch (e) {
         console.log("Error fetching data: ", e.message);
@@ -25,15 +25,17 @@ export const getRoom = async (req, res) => {
 
 export const addRoom = async (req, res) => {
     const room = req.body; // data from user's request
-    if (!room.name || !room.roomId) {
-        return res.status(400).json({ success: false, message: "Please provide all fields"});
-    }
     const newRoom = new Room(room);
+
+    if(Room.exists({ roomNameEN: room.roomNameEN }) != null) {
+        return res.status(500).json({ success: false, message: "This room is already existed!" });
+    }
+
     try{
         await newRoom.save();
         res.status(201).json({ success: true, data: newRoom});
     } catch(error) {
-        console.error("Error creating product: ", error.message);
+        console.error("Error creating room: ", error.message);
         res.status(500).json({ success: false, message: "Internal Server Error"});
     }
 }
@@ -49,7 +51,7 @@ export const deleteRoom = async (req, res) => {
         await Room.findByIdAndDelete(id);
         res.status(200).json({success: true, message: `Room id ${id} has deleted successfully`});
     } catch(e) {
-        console.log("Error deleting Room: ", e.message);
+        console.log("Error deleting room: ", e.message);
         res.status(500).json({success: false, message: "Internal Server Error"});
     }
 }
