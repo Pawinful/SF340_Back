@@ -15,14 +15,13 @@ async function TULogin(loginData) {
         return e.message
     })
 
-    console.log(loginResponse.data)
     return loginResponse;
 }
 
 export const login = async (req, res) => {
     const loginData = req.body;
     if(loginData.UserName == "admin" && loginData.PassWord == "admin") {
-        // start remove this when deploy
+        // ==start== remove this when deploy
         const data = {
             "status": true,
             "message": "Success",
@@ -55,7 +54,7 @@ export const login = async (req, res) => {
         }
 
         return res.status(200).json({ success: true, data: data })
-        // end remove this when deploy
+        // ==end== remove this when deploy
     } else {
         TULogin(loginData)
         .then(async data => {
