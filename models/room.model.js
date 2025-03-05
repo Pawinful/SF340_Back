@@ -1,4 +1,4 @@
-const mongoose = require('mongoose');
+import mongoose from 'mongoose';
 
 const RoomSchema = mongoose.Schema(
     {
@@ -50,4 +50,4 @@ const RoomSchema = mongoose.Schema(
 
 const Room = mongoose.model("Room", RoomSchema);
 
-module.exports = Room;
+export default Room;
