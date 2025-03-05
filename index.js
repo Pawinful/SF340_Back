@@ -1,9 +1,11 @@
 import dotenv from 'dotenv';
 import express from 'express';
+import cors from 'cors';
 
 import { connectDB } from './config/db.js';
 import roomRoutes from './routes/roomRoute.js';
 import adminRoutes from './routes/adminRoute.js';
+import userRoutes from './routes/userRoute.js';
 
 dotenv.config();
 
@@ -15,6 +17,8 @@ app.use(express.json());
 
 app.use('/api/rooms', roomRoutes);
 app.use('/api/admin', adminRoutes);
+app.use('/api/user', userRoutes);
+app.use(cors());
 
 app.listen(PORT, () => {
     connectDB();
