@@ -10,6 +10,14 @@ const BookingSchema = mongoose.Schema(
             type: String,
             required: true
         },
+        roomNameTH: {
+            type: String,
+            required: true
+        },
+        roomNameEN: {
+            type: String,
+            required: true
+        },
         customerUsername: {
             type: String,
             required: true

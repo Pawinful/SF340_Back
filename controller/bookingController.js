@@ -13,6 +13,24 @@ export const getUserOngoingBooking = async (req, res) => {
     }
 }
 
+export const getAllPendingBooking = async (req, res) => {
+    try {
+        const pendingBookings = await Booking.find({ bookingStatus: "PENDING" }).exec();
+        return res.status(200).json({ success: true, data: pendingBookings });
+    } catch (error) {
+        return res.status(404).json({ success: false, message: error.message });
+    }
+}
+
+export const getAllBooking = async (req, res) => {
+    try {
+        const AllBookings = await Booking.find();
+        return res.status(200).json({ success: true, data: AllBookings });
+    } catch (error) {
+        return res.status(404).json({ success: false, message: error.message });
+    }
+}
+
 export const getUserBookingHistory = async (req, res) => {
     const body = req.body;
     const user = await User.findOne({ username: body.username });
@@ -40,6 +58,8 @@ export const book = async (req, res) => {
         const newBooking = new Booking({
             meetingName: body.meetingName,
             meetingDescription: body.meetingDescription,
+            roomNameTH: body.roomNameTH,
+            roomNameEN: body.roomNameEN,
             customerUsername: body.customerUsername,
             customerDepartment: body.customerDepartment,
             customerEmail: body.customerEmail,
