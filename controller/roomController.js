@@ -11,6 +11,18 @@ export const getAllRoom = async (req, res) => {
     }
 }
 
+export const getRoom = async (req, res) => {
+    const roomName = req.body('roomNameEn');
+
+    try {
+        const Rooms = await Room.find({}, { projection: { roomNameEN: roomName } });
+        res.status(200).json({ success: true, data: Rooms });
+    } catch (e) {
+        console.log("Error fetching data: ", e.message);
+        res.status(500).json({ success: false, message: "Internal Server Error" })
+    }
+}
+
 export const addRoom = async (req, res) => {
     const room = req.body; // data from user's request
     if (!room.name || !room.roomId) {
