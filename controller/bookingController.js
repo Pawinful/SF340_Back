@@ -24,6 +24,16 @@ export const getUserBookingHistory = async (req, res) => {
     }
 }
 
+export const getBooking = async (req, res) => {
+    const body = req.body;
+    try {
+        const booking = await Booking.findOne({ _id: body.id });
+        return res.status(200).json({ success: true, data: booking });
+    } catch (error) {
+        return res.status(404).json({ success: false, message: error.message });
+    }
+}
+
 export const book = async (req, res) => {
     const body = req.body;
     try {
@@ -45,6 +55,17 @@ export const book = async (req, res) => {
         return res.status(200).json({ success: true, data: newBooking });
     } catch(error) {
         return res.status(500).json({ success: false, message: error.message });
+    }
+}
+
+export const approveBooking = async (req, res) => {
+    const body = req.body;
+    try {
+        await Booking.findByIdAndUpdate({ _id: body._id }, body);
+        const approvedBooking = await Booking.findById(body._id);
+        res.status(200).json({ success: true, data: approvedBooking });
+    } catch (error) {
+        res.status(500).json({ success: false, message: error.message });
     }
 }
 

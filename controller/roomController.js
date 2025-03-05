@@ -15,7 +15,7 @@ export const getRoom = async (req, res) => {
     const room = req.body;
 
     try {
-        const Rooms = await Room.find({ roomNameEN: room.roomNameEN });
+        const Rooms = await Room.findOne({ roomNameEN: room.roomNameEN }).exec();
         res.status(200).json({ success: true, data: Rooms });
     } catch (e) {
         console.log("Error fetching data: ", e.message);
