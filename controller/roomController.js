@@ -13,9 +13,10 @@ export const getAllRoom = async (req, res) => {
 
 export const getRoom = async (req, res) => {
     const room = req.body;
+    const params = req.params
 
     try {
-        const Rooms = await Room.findOne({ roomNameEN: room.roomNameEN }).exec();
+        const Rooms = await Room.findOne({ _id: params }).exec();
         res.status(200).json({ success: true, data: Rooms });
     } catch (e) {
         console.log("Error fetching data: ", e.message);
@@ -26,9 +27,11 @@ export const getRoom = async (req, res) => {
 export const addRoom = async (req, res) => {
     const room = req.body; // data from user's request
     const newRoom = new Room(room);
+    const checkRoom = await Room.exists({ roomNameEN: room.roomNameEN });
+    console.log(checkRoom);
 
-    if(Room.exists({ roomNameEN: room.roomNameEN }) != null) {
-        return res.status(500).json({ success: false, message: "This room is already existed!" });
+    if(checkRoom != null) {
+        return res.status(500).json({ success: false, data: checkRoom });
     }
 
     try{

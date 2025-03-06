@@ -24,7 +24,7 @@ export const getAllPendingBooking = async (req, res) => {
 
 export const getAllBooking = async (req, res) => {
     try {
-        const AllBookings = await Booking.find();
+        const AllBookings = await Booking.find({ bookingStatus: {$ne: "PENDING"} });
         return res.status(200).json({ success: true, data: AllBookings });
     } catch (error) {
         return res.status(404).json({ success: false, message: error.message });

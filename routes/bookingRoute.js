@@ -7,7 +7,7 @@ router.get('/getUserBooking', getUserOngoingBooking);
 
 router.get('/getBookingHistory', getUserBookingHistory);
 
-router.get('/getBooking', getBooking);
+router.post('/getBooking', getBooking);
 
 router.get('/getPendingBooking', getAllPendingBooking);
 

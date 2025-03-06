@@ -7,7 +7,7 @@ router.post('/addRoom', addRoom);
 
 router.get('/getAllRoom', getAllRoom);
 
-router.get('/getRoom', getRoom);
+router.get('/getRoom/:_id', getRoom);
 
 router.delete('/deleteRoom/:id', deleteRoom);
 
