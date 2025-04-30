@@ -1,17 +1,25 @@
 import express from 'express';
-import { approveBooking, book, getAllBooking, getAllPendingBooking, getBooking, getUserBookingHistory, getUserOngoingBooking, migrate } from '../controller/bookingController.js';
+import { approveBooking, book, deleteBooking, editBooking, getAllBooking, getAllBookingByRoom, getAllPendingBooking, getBooking, getRoomOngoingBooking, getUserBookingHistory, getUserOngoingBooking, migrate } from '../controller/bookingController.js';
 
 const router = express.Router();
 
-router.get('/getUserBooking', getUserOngoingBooking);
+router.get('/getUserBooking/:username', getUserOngoingBooking);
 
-router.get('/getBookingHistory', getUserBookingHistory);
+router.post('/getRoomBooking', getRoomOngoingBooking);
 
-router.post('/getBooking', getBooking);
+router.get('/getBookingHistory/:username', getUserBookingHistory);
+
+router.post('/getBooking/:id', getBooking);
+
+router.put('/editBooking/:id', editBooking);
+
+router.delete('/deleteBooking/:id', deleteBooking);
 
 router.get('/getPendingBooking', getAllPendingBooking);
 
 router.get('/getAllBooking', getAllBooking);
+
+router.get('/getAllBookingByRoom', getAllBookingByRoom);
 
 router.post('/book', book);
 
